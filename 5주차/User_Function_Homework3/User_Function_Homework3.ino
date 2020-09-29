@@ -9,7 +9,7 @@ void setup() // Built-in initialization block
   servoRight.attach(12); // Attach right signal to pin 12
   for (int i = 1; i <= 4; i++) {
     maneuver(200, 200, 2000); // Forward 2 seconds
-    maneuver(200, -200, 480); // Right 0.6   seconds
+    maneuver(200, -200, 480); // Right 0.48 seconds
   }
   maneuver(0, 0, -1); // Disable servos
 }
