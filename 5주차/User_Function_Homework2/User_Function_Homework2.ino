@@ -7,9 +7,10 @@ void setup() // Built-in initialization block
   delay(1000); // Delay to finish tone
   servoLeft.attach(13); // Attach left signal to pin 13
   servoRight.attach(12); // Attach right signal to pin 12
-  maneuver(200, 200, 1700); // Forward 2 seconds
-  maneuver(200, -200, 995); // Right 1 seconds
-  maneuver(200, 200, 1700); // Forward 2 seconds
+  maneuver(200, 200, 2000); // Forward 2 seconds
+  maneuver(200, -200, 995); // Right 0.995 seconds
+  maneuver(200, 200, 1700); // Forward 1.7 seconds
+  //장치가 정지하면서 이동하는 거리를 고려하여 1.7초로 정하였음
   maneuver(0, 0, -1); // Disable servos
 }
 void loop() // Main loop auto-repeats
