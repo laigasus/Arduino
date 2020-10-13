@@ -18,6 +18,7 @@ void loop()               // Main loop auto-repeats
   ndShade = tRight / (tLeft + tRight) - 0.5; //Calculate it and subtract 0.5
   int speedLeft, speedRight;  // Declare speed variables
 
+  //-0.05<=ndShade<=0.05 로 범위를 주어 좌우 출력값이 비슷할경우(완전 밝거나 어둡거나)
   if (ndShade > 0.05)         // Shade on right?
   { // Slow down left wheel
     speedLeft = int(200.0 - (ndShade * 1000.0));
@@ -31,6 +32,7 @@ void loop()               // Main loop auto-repeats
     speedLeft = 200;         // Full speed left wheel
   }
   else {
+    //위의 범뷔값에 들어갔을때 출력 값이 낮을 경우(빛이 밝음) 정지
     if (tLeft < 4000 && tRight < 4000) {
       servoLeft.detach();
       servoRight.detach();
