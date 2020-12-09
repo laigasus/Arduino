@@ -71,7 +71,7 @@ public:
     bool GetIsRunning()
     {
         uint8_t sreg = getReg(DS1307_REG_STATUS);
-        return (!(sreg & _BV(DS1307_CH)) && (_lastError == 0));
+        return !(sreg & _BV(DS1307_CH));
     }
 
     void SetIsRunning(bool isRunning)
@@ -123,13 +123,7 @@ public:
             RtcDateTime(0);
         }
 
-        uint8_t bytesRead = _wire.requestFrom(DS1307_ADDRESS, DS1307_REG_TIMEDATE_SIZE);
-        if (DS1307_REG_TIMEDATE_SIZE != bytesRead)
-        {
-            _lastError = 4;
-            RtcDateTime(0);
-        }
-
+        _wire.requestFrom(DS1307_ADDRESS, DS1307_REG_TIMEDATE_SIZE);
         uint8_t second = BcdToUint8(_wire.read() & 0x7F);
         uint8_t minute = BcdToUint8(_wire.read());
         uint8_t hour = BcdToBin24Hour(_wire.read());
@@ -236,12 +230,7 @@ private:
         }
 
         // control register
-        uint8_t bytesRead = _wire.requestFrom(DS1307_ADDRESS, (uint8_t)1);
-        if (1 != bytesRead)
-        {
-            _lastError = 4;
-            return 0;
-        }
+        _wire.requestFrom(DS1307_ADDRESS, (uint8_t)1);
 
         uint8_t regValue = _wire.read();
         return regValue;
